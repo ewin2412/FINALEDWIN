@@ -11,18 +11,36 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.edwincanas.finaledwin.ui.theme.FINALEDWINTheme
+import com.edwincanas.finaledwin.ui.theme.RegisterScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            
+            FINALEDWINTheme {
+
+                val myNavController = rememberNavController()
+                val myStartDestination: String = "login"
+
+                NavHost(
+                    navController = myNavController,
+                    startDestination = myStartDestination,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    composable("login") {
+                        LoginScreen(myNavController)
+                    }
+                    composable("login") {
+                        RegisterScreen()
+                    }
                 }
             }
         }
     }
 }
-
 
