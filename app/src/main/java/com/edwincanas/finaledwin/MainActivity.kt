@@ -1,5 +1,6 @@
 package com.edwincanas.finaledwin
 
+import RegisterScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,7 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.edwincanas.finaledwin.ui.theme.FINALEDWINTheme
-import com.edwincanas.finaledwin.ui.theme.RegisterScreen
+import com.edwincanas.finaledwin.ui.theme.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +37,10 @@ class MainActivity : ComponentActivity() {
                         LoginScreen(myNavController)
                     }
                     composable("login") {
-                        RegisterScreen()
+                        RegisterScreen(myNavController)
+                    }
+                    composable("home") {
+                        HomeScreen()
                     }
                 }
             }
