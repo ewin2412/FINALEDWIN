@@ -6,17 +6,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.edwincanas.finaledwin.ui.theme.FINALEDWINTheme
 import com.edwincanas.finaledwin.ui.theme.HomeScreen
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +23,10 @@ class MainActivity : ComponentActivity() {
             FINALEDWINTheme {
 
                 val myNavController = rememberNavController()
-                val myStartDestination: String = "login"
+                val auth = Firebase.auth
+                val currentUser = auth.currentUser
+
+                val myStartDestination = if (currentUser != null) "home" else "login"
 
                 NavHost(
                     navController = myNavController,
@@ -34,17 +34,40 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     composable("login") {
-                        LoginScreen(myNavController)
+                        LoginScreen(
+                            onClickRegister = {
+                                myNavController.navigate("register")
+                            },
+                            onSuccessfulLogin = {
+                                myNavController.navigate("home") {
+                                    popUpTo("login") { inclusive = true }
+                                }
+                            }
+                        )
                     }
-                    composable("login") {
-                        RegisterScreen(myNavController)
+                    composable("register") {
+                        RegisterScreen(
+                            onClickBack = {
+                                myNavController.popBackStack()
+                            },
+                            onSuccessfulRegister = {
+                                myNavController.navigate("home") {
+                                    popUpTo(0)
+                                }
+                            }
+                        )
                     }
                     composable("home") {
-                        HomeScreen()
+                        HomeScreen(
+                            onClickLogout = {
+                                myNavController.navigate("login") {
+                                    popUpTo(0)
+                                }
+                            }
+                        )
                     }
                 }
             }
         }
     }
 }
-

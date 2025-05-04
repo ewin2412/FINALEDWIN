@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "769625605759",
+    "project_id": "loginfirebase-3e82b",
+    "storage_bucket": "loginfirebase-3e82b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769625605759:android:031506b2015e0318cf214a",
+        "android_client_info": {
+          "package_name": "com.edwincanas.finaledwin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzDj8VANKSD2z6ocKo5PHAgUfh3_3Iemw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
